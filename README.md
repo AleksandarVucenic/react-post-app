@@ -1,5 +1,9 @@
 # React Project post app
 
+Fetch node modules:
+
+### `npm install`
+
 In the project directory, you can run script to start application:
 
 ### `npm start`
