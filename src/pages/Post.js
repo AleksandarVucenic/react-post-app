@@ -6,8 +6,8 @@ import useDispatch from "../hooks/useDispatch";
 import useSelector from "../hooks/useSelector";
 import { fetchPost, fetchPostCommets } from "../store/actions/actions";
 import { getPostById } from "../store/selectors/selector.posts";
-
-const Post = () => {
+import withLogger from "../HOC/withLogger";
+const Post = (props) => {
 	const { id } = useParams();
 	const postId = Number(id);
 	const post = useSelector((state) => getPostById(state, postId));
@@ -26,6 +26,10 @@ const Post = () => {
 				dispatch(fetchPostCommets(result));
 			});
 	}, [dispatch, postId]);
+
+	useEffect(() => {
+		console.log(`${props.helloMessage} PostPage`);
+	}, [props]);
 
 	return (
 		<>
@@ -50,4 +54,4 @@ const Post = () => {
 	);
 };
 
-export default Post;
+export default withLogger(Post);
