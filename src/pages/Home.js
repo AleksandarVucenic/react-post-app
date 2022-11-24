@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import withLogger from "../HOC/withLogger";
 
-const Home = () => {
+const Home = (props) => {
+	useEffect(() => {
+		console.log(`${props.helloMessage} Home`);
+	}, [props]);
+
 	return (
 		<div>
 			<h3>Aleksandar Vucenic</h3>
@@ -15,4 +20,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default withLogger(Home);

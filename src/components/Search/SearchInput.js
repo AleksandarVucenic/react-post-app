@@ -1,12 +1,17 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import withLogger from "../../HOC/withLogger";
 
-const SearchInput = ({ onChange }) => {
+const SearchInput = ({ onChange, helloMessage }) => {
 	const searchRef = useRef();
 
 	const onSearch = () => {
 		onChange(searchRef.current.value);
 	};
+
+	useEffect(() => {
+		console.log(`${helloMessage} Search Input`);
+	}, [helloMessage]);
 
 	return (
 		<div className="form-group">
@@ -26,4 +31,4 @@ SearchInput.propTypes = {
 	onChange: PropTypes.func,
 };
 
-export default SearchInput;
+export default withLogger(SearchInput);

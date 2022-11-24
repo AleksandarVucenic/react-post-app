@@ -3,8 +3,9 @@ import PostList from "../components/Posts/PostList";
 import SearchInput from "../components/Search/SearchInput";
 import useDispatch from "../hooks/useDispatch";
 import { fetchComments, fetchPosts } from "../store/actions/actions";
+import withLogger from "../HOC/withLogger";
 
-const Posts = () => {
+const Posts = ({ helloMessage }) => {
 	const dispatch = useDispatch();
 	const [search, setSearch] = useState(() => "");
 
@@ -21,6 +22,10 @@ const Posts = () => {
 				dispatch(fetchComments(result));
 			});
 	}, [dispatch]);
+
+	useEffect(() => {
+		console.log(`${helloMessage} Posts Page`);
+	}, [helloMessage]);
 
 	const onSearch = useCallback((searchName) => {
 		setSearch(searchName);
@@ -42,4 +47,4 @@ const Posts = () => {
 	);
 };
 
-export default Posts;
+export default withLogger(Posts);

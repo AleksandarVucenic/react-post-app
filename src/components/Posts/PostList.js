@@ -3,8 +3,9 @@ import useSelector from "../../hooks/useSelector";
 import { getPosts } from "../../store/selectors/selector.posts";
 import Post from "./Post";
 import PropTypes from "prop-types";
+import withLogger from "../../HOC/withLogger";
 
-const PostList = ({ search }) => {
+const PostList = ({ search, helloMessage }) => {
 	const [page, setPage] = useState(() => {
 		return 1;
 	});
@@ -26,6 +27,10 @@ const PostList = ({ search }) => {
 			window.removeEventListener("scroll", () => {});
 		};
 	}, []);
+
+	useEffect(() => {
+		console.log(`${helloMessage} Post List`);
+	}, [helloMessage]);
 
 	return (
 		<div>
@@ -52,4 +57,4 @@ PostList.defaultProps = {
 	search: "",
 };
 
-export default PostList;
+export default withLogger(PostList);

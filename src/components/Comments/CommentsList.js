@@ -2,9 +2,15 @@ import useSelector from "../../hooks/useSelector";
 import { getPostComments } from "../../store/selectors/selector.comments";
 import Comment from "./Comment";
 import PropTypes from "prop-types";
+import withLogger from "../../HOC/withLogger";
+import { useEffect } from "react";
 
-const CommentsList = (props) => {
-	const comments = useSelector((state) => getPostComments(state, props.postId));
+const CommentsList = ({ postId, helloMessage }) => {
+	useEffect(() => {
+		console.log(`${helloMessage} Comment List`);
+	}, [helloMessage]);
+
+	const comments = useSelector((state) => getPostComments(state, postId));
 	return (
 		<div>
 			<h3>Comments</h3>
@@ -21,4 +27,4 @@ CommentsList.propTypes = {
 	postId: PropTypes.number,
 };
 
-export default CommentsList;
+export default withLogger(CommentsList);
